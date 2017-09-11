@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <!-- Lista com todos os cachorros -->
+        <item
+            android:id="@+id/nav_item_dogs_all"
+            android:checked="true"
+            android:icon="@drawable/ic_dogs"
+            android:title="@string/dogs" />
+        <!-- Lista com os cachorros pequenos -->
+        <item
+            android:id="@+id/nav_item_dogs_small"
+            android:checked="true"
+            android:icon="@drawable/ic_small"
+            android:title="@string/small" />
+        <!-- Lista com os cachorros porte medio -->
+        <item
+            android:id="@+id/nav_item_dogs_medium"
+            android:checked="true"
+            android:icon="@drawable/ic_medium"
+            android:title="@string/medium" />
+        <!-- Lista com os cachorros porte grande -->
+        <item
+            android:id="@+id/nav_item_dogs_large"
+            android:checked="true"
+            android:icon="@drawable/ic_large"
+            android:title="@string/large" />
+        <!-- site fiap -->
+        <item
+            android:id="@+id/nav_item_site_fiap"
+            android:icon="@drawable/ic_drawer_site_fiap"
+            android:title="@string/site_da_fiap" />
+        <!-- Tela de configurações -->
+        <item
+            android:id="@+id/nav_item_settings"
+            android:icon="@drawable/ic_drawer_settings"
+            android:title="@string/settings" />
+    </group>
+</menu>

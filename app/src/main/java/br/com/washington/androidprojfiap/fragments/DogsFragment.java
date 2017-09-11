@@ -1,0 +1,350 @@
+package br.com.washington.androidprojfiap.fragments;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.squareup.otto.Subscribe;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.washington.androidprojfiap.DogsApplication;
+import br.com.washington.androidprojfiap.R;
+import br.com.washington.androidprojfiap.activity.DogActivity;
+import br.com.washington.androidprojfiap.activity.SiteFiapActivity;
+import br.com.washington.androidprojfiap.adapter.DogAdapter;
+import br.com.washington.androidprojfiap.domain.Dog;
+import br.com.washington.androidprojfiap.domain.DogDB;
+import br.com.washington.androidprojfiap.domain.DogService;
+import livroandroid.lib.fragment.BaseFragment;
+import livroandroid.lib.utils.AndroidUtils;
+import livroandroid.lib.utils.IOUtils;
+import livroandroid.lib.utils.SDCardUtils;
+
+import org.parceler.Parcels;
+
+public class DogsFragment extends BaseFragment {
+    protected RecyclerView recyclerView;
+    private int tipo;
+    private List<Dog> dogs;
+    private SwipeRefreshLayout swipeLayout;
+    private ActionMode actionMode;
+    private Intent shareIntent;
+
+    // Método para instanciar esse fragment pelo tipo.
+    public static DogsFragment newInstance(int tipo) {
+        Bundle args = new Bundle();
+        args.putInt("tipo", tipo);
+        DogsFragment f = new DogsFragment();
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            // Lê o tipo dos argumentos.
+            this.tipo = getArguments().getInt("tipo");
+        }
+
+        // Registra a classe para receber eventos.
+        DogsApplication.getInstance().getBus().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        // Cancela o recebimento de eventos.
+        DogsApplication.getInstance().getBus().unregister(this);
+    }
+
+    @Subscribe
+    public void onBusAtualizarListaDogs(String refresh) {
+        // Recebeu o evento, atualiza a lista.
+        taskDogs(false);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_dogs, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+// Swipe to Refresh
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeToRefresh);
+        swipeLayout.setOnRefreshListener(OnRefreshListener());
+        swipeLayout.setColorSchemeResources(
+                R.color.refresh_progress_1,
+                R.color.refresh_progress_2,
+                R.color.refresh_progress_3);
+
+        return view;
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener OnRefreshListener() {
+        return new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Valida se existe conexão ao fazer o gesto Pull to Refresh
+                if (AndroidUtils.isNetworkAvailable(getContext())) {
+                    // Atualiza ao fazer o gesto Pull to Refresh
+                    taskDogs(true);
+                } else {
+                    swipeLayout.setRefreshing(false);
+                    snack(recyclerView, R.string.msg_error_conexao_indisponivel);
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        taskDogs(false);
+    }
+
+    private void taskDogs(boolean pullToRefresh) {
+        // Busca os dogs: Dispara a Task
+        startTask("dogs", new GetDogsTask(pullToRefresh), pullToRefresh ? R.id.swipeToRefresh : R.id.progress);
+    }
+
+    private DogAdapter.DogOnClickListener onClickDog() {
+        return new DogAdapter.DogOnClickListener() {
+            @Override
+            public void onClickDog(View view, int idx) {
+                Dog c = dogs.get(idx);
+                if (actionMode == null) {
+                    Intent intent = new Intent(getContext(), DogActivity.class);
+                    intent.putExtra("dog", c);
+                    startActivity(intent);
+                } else { // Se a CAB está ativada
+                    // Seleciona o dog
+                    c.selected = !c.selected;
+                    // Atualiza o título com a quantidade de dogs selecionados
+                    updateActionModeTitle();
+                    // Redesenha a lista
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onLongClickDog(View view, int idx) {
+                if (actionMode != null) {
+                    return;
+                }
+                // Liga a action bar de contexto (CAB)
+                actionMode = getAppCompatActivity().
+                        startSupportActionMode(getActionModeCallback());
+                Dog c = dogs.get(idx);
+                c.selected = true; // Seleciona o dog
+                // Solicita ao Android para desenhar a lista novamente
+                recyclerView.getAdapter().notifyDataSetChanged();
+                // Atualiza o título para mostrar a quantidade de dogs selecionados
+                updateActionModeTitle();
+            }
+
+        };
+    }
+
+    // Atualiza o título da action bar (CAB)
+    private void updateActionModeTitle() {
+        if (actionMode != null) {
+            actionMode.setTitle(R.string.select_dog);
+            actionMode.setSubtitle(null);
+            List<Dog> selectedDogs = getSelectedDogs();
+            if (selectedDogs.size() == 1) {
+                actionMode.setSubtitle("1 " + R.string.select_dog);
+            } else if (selectedDogs.size() > 1) {
+                actionMode.setSubtitle(selectedDogs.size() + R.string.select_dog);
+            }
+            updateShareIntent(selectedDogs);
+        }
+    }
+
+    // Atualiza a share intent com os dogs selecionados
+    private void updateShareIntent(List<Dog> selectedDogs) {
+        if (shareIntent != null) {
+            // Texto com os dogs
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "Dogs: " + selectedDogs);
+        }
+    }
+
+    // Retorna a lista de dogs selecionados
+    private List<Dog> getSelectedDogs() {
+        List<Dog> list = new ArrayList<Dog>();
+        for (Dog c : dogs) {
+            if (c.selected) {
+                list.add(c);
+            }
+        }
+        return list;
+    }
+
+    private ActionMode.Callback getActionModeCallback() {
+        return new ActionMode.Callback() {
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                // Infla o menu específico da action bar de contexto (CAB)
+                MenuInflater inflater = getActivity().getMenuInflater();
+                inflater.inflate(R.menu.menu_frag_dogs_cab, menu);
+                MenuItem shareItem = menu.findItem(R.id.action_share);
+//                ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+//                shareIntent = new Intent(Intent.ACTION_SEND);
+//                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+//                shareIntent.setType("text/plain");
+//                share.setShareIntent(shareIntent);
+
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return true;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                List<Dog> selectedDogs = getSelectedDogs();
+                if (item.getItemId() == R.id.action_remove) {
+                    DogDB db = new DogDB(getContext());
+                    try {
+                        for (Dog c : selectedDogs) {
+                            db.delete(c); // Deleta o dog do banco
+                            dogs.remove(c); // Remove da lista
+                        }
+                    } finally {
+                        db.close();
+                    }
+                    snack(recyclerView, "Dogs excluídos com sucesso.");
+
+                } else if (item.getItemId() == R.id.action_share) {
+                    // Dispara a tarefa para fazer download das fotos
+                    startTask("compartilhar", new CompartilharTask(selectedDogs));
+
+                }
+                // Encerra o action mode
+                mode.finish();
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                // Limpa o estado
+                actionMode = null;
+                // Configura todos os dogs para não selecionados
+                for (Dog c : dogs) {
+                    c.selected = false;
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+        };
+    }
+
+    // Task para buscar os dogs
+    private class GetDogsTask implements TaskListener<List<Dog>> {
+        private boolean refresh;
+
+        public GetDogsTask(boolean refresh) {
+            this.refresh = refresh;
+        }
+
+        @Override
+        public List<Dog> execute() throws Exception {
+            // Busca os dogs em background (Thread)
+            return DogService.getDogs(getContext(), tipo, refresh);
+        }
+
+        @Override
+        public void updateView(List<Dog> dogs) {
+            if (dogs != null) {
+                // Salva a lista de dogs no atributo da classe
+                DogsFragment.this.dogs = dogs;
+                // Atualiza a view na UI Thread
+                recyclerView.setAdapter(new DogAdapter(getContext(), dogs, onClickDog()));
+            }
+        }
+
+        @Override
+        public void onError(Exception e) {
+            // Qualquer exceção lançada no método execute vai cair aqui.
+            alert("Ocorreu algum erro ao buscar os dados.");
+        }
+
+        @Override
+        public void onCancelled(String s) {
+        }
+    }
+
+    // Task para fazer o download
+    // Faça import da classe android.net.Uri;
+    private class CompartilharTask implements TaskListener {
+        private final List<Dog> selectedDogs;
+        // Lista de arquivos para compartilhar
+        ArrayList<Uri> imageUris = new ArrayList<Uri>();
+
+        public CompartilharTask(List<Dog> selectedDogs) {
+            this.selectedDogs = selectedDogs;
+        }
+
+        @Override
+        public Object execute() throws Exception {
+            if (selectedDogs != null) {
+                for (Dog c : selectedDogs) {
+                    // Faz o download da foto do dog para arquivo
+                    String url = c.urlFoto;
+                    String fileName = url.substring(url.lastIndexOf("/"));
+                    // Cria o arquivo no SD card
+                    File file = SDCardUtils.getPrivateFile(getContext(), "dogs", fileName);
+                    IOUtils.downloadToFile(c.urlFoto, file);
+                    // Salva a Uri para compartilhar a foto
+                    imageUris.add(Uri.fromFile(file));
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public void updateView(Object o) {
+            // Cria a intent com a foto dos dogs
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+            shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+            shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
+            shareIntent.setType("image/*");
+            // Cria o Intent Chooser com as opções
+            startActivity(Intent.createChooser(shareIntent, "Enviar Dogs"));
+        }
+
+        @Override
+        public void onError(Exception e) {
+            alert("Ocorreu algum erro ao compartilhar.");
+        }
+
+        @Override
+        public void onCancelled(String s) {
+        }
+    }
+
+}

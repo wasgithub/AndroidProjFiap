@@ -1,0 +1,42 @@
+{
+  "dogs": {
+    "dog": [
+      {
+        "nome": "Maltês",
+        "desc": "O Maltês é a mais antiga das raças toys europeias, e está entre as mais antigas de todas as raças do mundo. A ilha de Malta foi um dos primeiros portos comerciais, visitada por marinheiros fenícios em 1500 a.C. Os cães malteses foram mencionados em documentos já em 300 a.C.",
+        "url_info": "http://tudosobrecachorros.com.br/maltes/",
+        "url_foto": "http://www.equilibriototalalimentos.com.br/imagens/info4/42.jpg",
+        "url_video": "",
+        "latitude": "-23.564224",
+        "longitude": "-46.653156"
+      },
+      {
+        "nome": "Cão de Crista Chinês",
+        "desc": "Suas origens são difíceis de encontrar. Cães sem pelos parecem ter se desenvolvido por mutação pelo mundo todo, mas eles se espalharam principalmente nas Américas Central e do Sul. O Crista Chinês é uma exceção, pois parece que já existia na China desde o século 13. ",
+        "url_info": "http://www.chevrolet.com/corvette-sports-cars",
+        "url_foto": "https://www.encontrospet.com.br/blog/wp-content/uploads/2016/05/Cao-de-Crista-Chines01.jpg",
+        "url_video": "",
+        "latitude": "-23.564224",
+        "longitude": "-46.653156"
+      },
+      {
+        "nome": "Fox Paulistinha",
+        "desc": "Por volta de 1.500, os navios portugueses e holandeses chegavam no Brasil. Como os navios eram conhecidos por terem muitos ratos, eles traziam cães caçadores de animais pequenos (terriers) para ajudar a combater os ratos dos navios.",
+        "url_info": "http://tudosobrecachorros.com.br/fox-paulistinha/",
+        "url_foto": "http://2.bp.blogspot.com/-F04nSzPMV-w/Vb4nQAjhIOI/AAAAAAAACqY/AZxTwNtKm1Q/s1600/Terrier.png",
+        "url_video": "",
+        "latitude": "-23.564224",
+        "longitude": "-46.653156"
+      },
+      {
+        "nome": "Griffon de Bruxelas",
+        "desc": "De origem Belga, o Griffon de Bruxelas, provavelmente teve como seus antepassados o Affenpinscher e um cão de rua belga o Griffon d’ ecurie ou “grifo estável”.",
+        "url_info": "http://tudosobrecachorros.com.br/griffon-de-bruxelas/",
+        "url_foto": "http://image.cachorrogato.com.br/imagens/topos/topo_146_1375217763.png",
+        "url_video": "",
+        "latitude": "-23.564224",
+        "longitude": "-46.653156"
+      }
+    ]
+  }
+}

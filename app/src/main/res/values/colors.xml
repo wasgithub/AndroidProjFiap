@@ -1,0 +1,25 @@
+<resources>
+    <!-- Cores do Tema Material -->
+    <color name="primary">#4a5c60</color>
+    <color name="primary_dark">#4a5c60</color>
+    <color name="accent">#0c9abe</color>
+    <color name="control_highlight">#B3E5FC</color>
+
+    <!-- Outras cores -->
+    <color name="transparent">#0000</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="blue">#0c9abe</color>
+    <color name="red">#c64840</color>
+    <color name="green">#00b28e</color>
+    <color name="gray">#eee</color>
+
+    <!-- SwipeRefreshLayout -->
+    <color name="refresh_progress_1">#33B5E5</color>
+    <!-- azul -->
+    <color name="refresh_progress_2">#99CC00</color>
+    <!-- verde -->
+    <color name="refresh_progress_3">#CC0000</color>
+    <!-- vermelho -->
+
+</resources>
