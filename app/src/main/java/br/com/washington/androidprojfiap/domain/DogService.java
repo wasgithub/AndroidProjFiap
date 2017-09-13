@@ -195,7 +195,7 @@ public class DogService {
         List<Dog> dogs = new ArrayList<Dog>();
         Element root = XMLUtils.getRoot(xml, "UTF-8");
         // Le todas as tags <dog>
-        List<Node> nodeDogs = XMLUtils.getChildren(root, "carro");
+        List<Node> nodeDogs = XMLUtils.getChildren(root, "dog");
         // Insere cada dog na lista
         for (Node node : nodeDogs) {
             Dog c = new Dog();

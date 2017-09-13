@@ -106,7 +106,7 @@ public class DogFragment extends BaseFragment{
 
             return true;
         } else if (item.getItemId() == R.id.action_share) {
-            toast("Compartilhar");
+            toast(R.string.share);
         } else if (item.getItemId() == R.id.action_maps) {
             // Abre outra activity para mostrar o mapa
             Intent intent = new Intent(getContext(), MapaActivity.class);

@@ -9,36 +9,29 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.squareup.otto.Subscribe;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.washington.androidprojfiap.DogsApplication;
 import br.com.washington.androidprojfiap.R;
 import br.com.washington.androidprojfiap.activity.DogActivity;
-import br.com.washington.androidprojfiap.activity.SiteFiapActivity;
 import br.com.washington.androidprojfiap.adapter.DogAdapter;
 import br.com.washington.androidprojfiap.domain.Dog;
 import br.com.washington.androidprojfiap.domain.DogDB;
 import br.com.washington.androidprojfiap.domain.DogService;
 import livroandroid.lib.fragment.BaseFragment;
 import livroandroid.lib.utils.AndroidUtils;
-import livroandroid.lib.utils.IOUtils;
-import livroandroid.lib.utils.SDCardUtils;
 
-import org.parceler.Parcels;
+import static br.com.washington.androidprojfiap.R.string.share;
 
 public class DogsFragment extends BaseFragment {
     protected RecyclerView recyclerView;
@@ -46,7 +39,6 @@ public class DogsFragment extends BaseFragment {
     private List<Dog> dogs;
     private SwipeRefreshLayout swipeLayout;
     private ActionMode actionMode;
-    private Intent shareIntent;
 
     // Método para instanciar esse fragment pelo tipo.
     public static DogsFragment newInstance(int tipo) {
@@ -75,12 +67,6 @@ public class DogsFragment extends BaseFragment {
 
         // Cancela o recebimento de eventos.
         DogsApplication.getInstance().getBus().unregister(this);
-    }
-
-    @Subscribe
-    public void onBusAtualizarListaDogs(String refresh) {
-        // Recebeu o evento, atualiza a lista.
-        taskDogs(false);
     }
 
     @Override
@@ -141,9 +127,6 @@ public class DogsFragment extends BaseFragment {
                 } else { // Se a CAB está ativada
                     // Seleciona o dog
                     c.selected = !c.selected;
-                    // Atualiza o título com a quantidade de dogs selecionados
-                    updateActionModeTitle();
-                    // Redesenha a lista
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }
             }
@@ -178,15 +161,6 @@ public class DogsFragment extends BaseFragment {
             } else if (selectedDogs.size() > 1) {
                 actionMode.setSubtitle(selectedDogs.size() + R.string.select_dog);
             }
-            updateShareIntent(selectedDogs);
-        }
-    }
-
-    // Atualiza a share intent com os dogs selecionados
-    private void updateShareIntent(List<Dog> selectedDogs) {
-        if (shareIntent != null) {
-            // Texto com os dogs
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "Dogs: " + selectedDogs);
         }
     }
 
@@ -208,13 +182,6 @@ public class DogsFragment extends BaseFragment {
                 // Infla o menu específico da action bar de contexto (CAB)
                 MenuInflater inflater = getActivity().getMenuInflater();
                 inflater.inflate(R.menu.menu_frag_dogs_cab, menu);
-                MenuItem shareItem = menu.findItem(R.id.action_share);
-//                ShareActionProvider share = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-//                shareIntent = new Intent(Intent.ACTION_SEND);
-//                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-//                shareIntent.setType("text/plain");
-//                share.setShareIntent(shareIntent);
-
                 return true;
             }
 
@@ -240,8 +207,7 @@ public class DogsFragment extends BaseFragment {
 
                 } else if (item.getItemId() == R.id.action_share) {
                     // Dispara a tarefa para fazer download das fotos
-                    startTask("compartilhar", new CompartilharTask(selectedDogs));
-
+                    startTask(String.valueOf(share), new CompartilharTask(selectedDogs));
                 }
                 // Encerra o action mode
                 mode.finish();
@@ -302,6 +268,7 @@ public class DogsFragment extends BaseFragment {
         private final List<Dog> selectedDogs;
         // Lista de arquivos para compartilhar
         ArrayList<Uri> imageUris = new ArrayList<Uri>();
+        private String urlImg;
 
         public CompartilharTask(List<Dog> selectedDogs) {
             this.selectedDogs = selectedDogs;
@@ -313,12 +280,7 @@ public class DogsFragment extends BaseFragment {
                 for (Dog c : selectedDogs) {
                     // Faz o download da foto do dog para arquivo
                     String url = c.urlFoto;
-                    String fileName = url.substring(url.lastIndexOf("/"));
-                    // Cria o arquivo no SD card
-                    File file = SDCardUtils.getPrivateFile(getContext(), "dogs", fileName);
-                    IOUtils.downloadToFile(c.urlFoto, file);
-                    // Salva a Uri para compartilhar a foto
-                    imageUris.add(Uri.fromFile(file));
+                    urlImg = url;
                 }
             }
             return null;
@@ -327,19 +289,18 @@ public class DogsFragment extends BaseFragment {
         @Override
         public void updateView(Object o) {
             // Cria a intent com a foto dos dogs
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
-            shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-            shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
-            shareIntent.setType("image/*");
-            // Cria o Intent Chooser com as opções
-            startActivity(Intent.createChooser(shareIntent, "Enviar Dogs"));
+            Intent share = new Intent(android.content.Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            share.putExtra(Intent.EXTRA_SUBJECT, "Link .");
+            share.putExtra(Intent.EXTRA_TEXT, urlImg);
+
+            startActivity(Intent.createChooser(share, "link share!"));
         }
 
         @Override
         public void onError(Exception e) {
-            alert("Ocorreu algum erro ao compartilhar.");
+            alert("share error");
         }
 
         @Override
