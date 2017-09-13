@@ -244,7 +244,7 @@ public class DogsFragment extends BaseFragment {
         @Override
         public List<Dog> execute() throws Exception {
             // Busca os dogs em background (Thread)
-            return DogService.getDogs(getContext(), tipo, refresh);
+            return DogService.getDogs(getContext(), tipo, false); //deixado false para nao recarregar o arquivo json
         }
 
         @Override

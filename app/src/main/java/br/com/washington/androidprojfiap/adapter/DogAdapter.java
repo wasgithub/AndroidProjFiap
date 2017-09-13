@@ -22,7 +22,7 @@ import br.com.washington.androidprojfiap.domain.Dog;
  */
 
 public class DogAdapter extends RecyclerView.Adapter<DogAdapter.DogsViewHolder>  {
-    protected static final String TAG = "livroandroid";
+    protected static final String TAG = "fiap";
     private final List<Dog> dogs;
     private final Context context;
     private DogOnClickListener dogOnClickListener;
