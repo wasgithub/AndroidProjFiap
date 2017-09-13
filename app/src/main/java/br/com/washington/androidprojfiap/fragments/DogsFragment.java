@@ -49,6 +49,12 @@ public class DogsFragment extends BaseFragment {
         return f;
     }
 
+    @Subscribe
+     public void onBusAtualizarListaDogs(String refresh) {
+        // Recebeu o evento, atualiza a lista.
+         taskDogs(false);
+      }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -238,7 +244,7 @@ public class DogsFragment extends BaseFragment {
         @Override
         public List<Dog> execute() throws Exception {
             // Busca os dogs em background (Thread)
-            return DogService.getDogs(getContext(), tipo, refresh);
+            return DogService.getDogs(getContext(), tipo, false); //deixado false para nao recarregar o arquivo json
         }
 
         @Override
