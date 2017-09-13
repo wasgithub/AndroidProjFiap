@@ -49,6 +49,12 @@ public class DogsFragment extends BaseFragment {
         return f;
     }
 
+    @Subscribe
+     public void onBusAtualizarListaDogs(String refresh) {
+        // Recebeu o evento, atualiza a lista.
+         taskDogs(false);
+      }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
