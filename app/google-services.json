@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "69267975616",
+    "firebase_url": "https://mob-incrivel-aa226.firebaseio.com",
+    "project_id": "mob-incrivel-aa226",
+    "storage_bucket": "mob-incrivel-aa226.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69267975616:android:68fe913b698cf766",
+        "android_client_info": {
+          "package_name": "br.com.washington.a13mobincrivelfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69267975616-0j4es7kqt9p9cpo2qfpbts7i6gkcikd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARFPI9SCiPMtGpKsANjdd53lj_Xuifaa4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69267975616:android:61361b220b25d977",
+        "android_client_info": {
+          "package_name": "br.com.washington.androidprojfiap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69267975616-0j4es7kqt9p9cpo2qfpbts7i6gkcikd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARFPI9SCiPMtGpKsANjdd53lj_Xuifaa4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -120,6 +120,21 @@ package="br.com.washington.androidprojfiap">
                 android:value=".activity.DogActivity" />
         </activity>
 
+
+        firebase
+        <service
+            android:name=".firebase.MeuFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".firebase.MeuFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
