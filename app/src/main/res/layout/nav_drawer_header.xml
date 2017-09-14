@@ -10,10 +10,11 @@
     <ImageView
         android:id="@+id/imgUserBackground"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/navDrawerBackground_layout_height"
+        android:layout_height="match_parent"
         android:contentDescription="@string/vazio"
         android:scaleType="fitXY"
-        android:src="@drawable/nav_drawer_header" />
+        android:src="@drawable/ic_pata"
+        />
     <!-- Logo usuário -->
     <livroandroid.lib.view.RoundedImageView
         android:id="@+id/imgUserPhoto"

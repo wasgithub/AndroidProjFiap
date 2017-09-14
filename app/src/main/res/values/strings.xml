@@ -58,6 +58,15 @@ Dev: Washington Alexandre da silva.
 
     <!-- O -->
     <string name="ok">OK</string>
+    <string name="login_user">your user</string>
+    <string name="login_required_user">User required</string>
+    <string name="login_pass">your pass</string>
+    <string name="connect">Connect</string>
+    <string name="login_required_password">Password required</string>
+    <string name="login_invalid_user">Invalid user</string>
+    <string name="login_invalid_password">Invalid password</string>
+    <string name="keep_connected">Keep connected</string>
+    <string name="or">OR</string>
 
     <!-- S -->
     <string name="share">Share</string>
