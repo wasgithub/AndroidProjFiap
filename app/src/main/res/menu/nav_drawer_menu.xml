@@ -27,13 +27,13 @@
             android:title="@string/large" />
         <!-- site fiap -->
         <item
-            android:id="@+id/nav_item_site_fiap"
-            android:icon="@drawable/ic_drawer_site_fiap"
-            android:title="@string/site_da_fiap" />
+            android:id="@+id/nav_item_ligar_fiap"
+            android:icon="@drawable/call"
+            android:title="@string/call_fiap" />
         <!-- Tela de configurações -->
         <item
-            android:id="@+id/nav_item_settings"
-            android:icon="@drawable/ic_drawer_settings"
-            android:title="@string/settings" />
+            android:id="@+id/nav_item_exit"
+            android:icon="@drawable/ic_action_exit"
+            android:title="@string/exit" />
     </group>
 </menu>

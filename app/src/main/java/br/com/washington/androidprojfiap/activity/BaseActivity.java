@@ -2,6 +2,7 @@ package br.com.washington.androidprojfiap.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 //import br.com.washington.androidprojfiap.R;
 import br.com.washington.androidprojfiap.R;
@@ -88,16 +90,14 @@ public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
                 intent.putExtra("tipo", R.string.large);
                 startActivity(intent);
                 break;
-            case R.id.nav_item_site_fiap:
-                startActivity(new Intent(getContext(), SiteFiapActivity.class));
+            case R.id.nav_item_ligar_fiap:
+                //faz ligacao para FIAP
+                Uri uri = Uri.parse("tel:01133858010");
+                Intent intentTel = new Intent(Intent.ACTION_DIAL,uri);
+                startActivity(intentTel);
                 break;
-            case R.id.nav_item_settings:
-                if (AndroidUtils.isAndroid3Honeycomb()) {
-                    startActivity(new Intent(this, ConfiguracoesV11Activivity.class));
-                } else {
-                    startActivity(new Intent(this, ConfiguracoesActivivity.class));
-                }
-
+            case R.id.nav_item_exit:
+                this.finish();
                 break;
         }
     }

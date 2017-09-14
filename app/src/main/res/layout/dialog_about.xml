@@ -5,3 +5,4 @@
     android:padding="24dp"
     android:text="@string/about_dialog_text"
     android:background="@drawable/ic_logo_about"/>
+

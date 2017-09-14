@@ -6,6 +6,7 @@ package="br.com.washington.androidprojfiap">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- GPS por hardware -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -66,7 +67,6 @@ package="br.com.washington.androidprojfiap">
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
         </activity>
-        <activity android:name=".activity.SiteFiapActivity" />
         <activity
             android:name=".activity.prefs.ConfiguracoesActivivity"
             android:label="Configurações">
