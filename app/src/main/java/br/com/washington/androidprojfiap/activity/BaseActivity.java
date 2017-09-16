@@ -50,7 +50,7 @@ public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             if (navigationView != null && drawerLayout != null) {
                 // Atualiza a imagem e textos do header
-                NavDrawerUtil.setHeaderValues(navigationView, R.id.containerNavDrawerListViewHeader, R.drawable.nav_drawer_header, R.drawable.ic_logo_user, R.string.nav_drawer_username, R.string.nav_drawer_email);
+                NavDrawerUtil.setHeaderValues(navigationView, R.id.containerNavDrawerListViewHeader, R.drawable.nav_drawer_header, R.drawable.fundo, R.string.nav_drawer_username, R.string.nav_drawer_email);
                 // Trata o evento de clique no menu.
                 navigationView.setNavigationItemSelectedListener(
                         new NavigationView.OnNavigationItemSelectedListener() {

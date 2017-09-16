@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DogsAPP</string>
+    <string name="Atualizar">Atualizar</string>
+    <string name="action_about">Sobre</string>
+    <string name="action_settings">Configurações</string>
+    <string name="call_fiap">Ligar para FIAP</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="connect">Conectar</string>
+    <string name="descricao">Descrição</string>
+    <string name="dogs">Cachorros</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Deletar</string>
+    <string name="exit">Sair</string>
+    <string name="keep_connected">Continuar conectado</string>
+    <string name="large">Grande</string>
+    <string name="login_invalid_password">Senha invalida</string>
+    <string name="login_invalid_user">Usuario invalido</string>
+    <string name="login_pass">sua senha</string>
+    <string name="login_required_password">Senha requerida</string>
+    <string name="login_required_user">Usuario requerido</string>
+    <string name="login_user">Seu usuario</string>
+    <string name="mapa">Mapa</string>
+    <string name="mapa_hibrido">Modo Hybrido</string>
+    <string name="mapa_location_directions">Localização</string>
+    <string name="mapa_location_dog">Localizacao do cachorro</string>
+    <string name="mapa_normal">Modo normal</string>
+    <string name="mapa_satelite">Modo Satelite</string>
+    <string name="mapa_terreno">Modo terra</string>
+    <string name="medium">Médio</string>
+    <string name="msg_alerta_permissao"></string>
+    <string name="msg_error_conexao_indisponivel">57/5000</string>
+    <string name="nav_drawer_email">Para usar este aplicativo, você deve aceitar as permissões.</string>
+    <string name="nome">Nome</string>
+    <string name="or">OU</string>
+    <string name="select_dog">Selecionado</string>
+    <string name="settings">Configurações</string>
+    <string name="share">Compartilhar</string>
+    <string name="small">Pequeno</string>
+    <string name="sobre">Sobre</string>
+</resources>

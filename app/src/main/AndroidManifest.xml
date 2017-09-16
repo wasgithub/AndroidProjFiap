@@ -102,13 +102,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.VideoActivity"
-            android:parentActivityName=".activity.DogActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.DogActivity" />
-        </activity>
-        <activity
             android:name=".activity.MapaActivity"
             android:parentActivityName=".activity.DogActivity">
             <meta-data

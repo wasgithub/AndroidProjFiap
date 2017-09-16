@@ -27,11 +27,11 @@ public class DogsIntentActivity extends BaseActivity {
         // (*1*) Lê as informações da intent
         Intent intent = getIntent();
         Uri uri = intent.getData();
-        Log.d("livroandroid", "Action: " + intent.getAction());
-        Log.d("livroandroid", "Scheme: " + uri.getScheme());
-        Log.d("livroandroid", "Host: " + uri.getHost());
-        Log.d("livroandroid", "Path: " + uri.getPath());
-        Log.d("livroandroid", "PathSegments: " + uri.getPathSegments());
+        Log.d("fiap", "Action: " + intent.getAction());
+        Log.d("fiap", "Scheme: " + uri.getScheme());
+        Log.d("fiap", "Host: " + uri.getHost());
+        Log.d("fiap", "Path: " + uri.getPath());
+        Log.d("fiap", "PathSegments: " + uri.getPathSegments());
         // RecyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -45,7 +45,7 @@ public class DogsIntentActivity extends BaseActivity {
                 this.dogs = db.findAll();
                 recyclerView.setAdapter(new DogAdapter(this, dogs, onClickdog()));
             } else {
-                // (*3*) Busca o dog pelo nome: /dogs/Ferrari FF
+                // (*3*) Busca o dog pelo nome: /dogs/
                 List<String> paths = uri.getPathSegments();
                 String nome = paths.get(1);
                 Dog dog = db.findByNome(nome);

@@ -23,6 +23,7 @@
 
     <dimen name="login_vertical_margin">90dp</dimen>
     <dimen name="login_horizontal_margin">30dp</dimen>
+    <dimen name="dog_marg">20sp</dimen>
 
 
 </resources>
