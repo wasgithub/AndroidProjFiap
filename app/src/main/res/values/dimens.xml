@@ -27,6 +27,22 @@
 
     <dimen name="button_layout_width">250dp</dimen>
     <dimen name="button_layout_height">40dp</dimen>
+    <dimen name="dogbar">260dp</dimen>
+    <dimen name="dogspading">16dp</dimen>
+    <dimen name="facedimin">20dp</dimen>
+    <dimen name="textmarginadap">16dp</dimen>
+    <dimen name="adp_margin">6dp</dimen>
+    <dimen name="about_text">24dp</dimen>
+    <dimen name="dialog_linear">16dp</dimen>
+    <dimen name="dialog_editt">8dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="elevation_3">3dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="size_16">16sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_32">32dp</dimen>
 
 
 </resources>
