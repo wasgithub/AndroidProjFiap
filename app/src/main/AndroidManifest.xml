@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="br.com.washington.androidprojfiap">
+    package="br.com.washington.androidprojfiap">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- GPS por hardware -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -41,7 +42,7 @@ package="br.com.washington.androidprojfiap">
 
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,7 +67,6 @@ package="br.com.washington.androidprojfiap">
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
         </activity>
-        <activity android:name=".activity.SiteFiapActivity" />
         <activity
             android:name=".activity.prefs.ConfiguracoesActivivity"
             android:label="Configurações">
@@ -86,8 +86,6 @@ package="br.com.washington.androidprojfiap">
         <activity
             android:name=".activity.DogsIntentActivity"
             android:theme="@style/AppTheme">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -95,7 +93,6 @@ package="br.com.washington.androidprojfiap">
 
                 <data android:scheme="dogs" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.PICK" />
 
@@ -105,21 +102,25 @@ package="br.com.washington.androidprojfiap">
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.VideoActivity"
-            android:parentActivityName=".activity.DogActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.DogActivity" />
-        </activity>
-
-        <activity
             android:name=".activity.MapaActivity"
             android:parentActivityName=".activity.DogActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.DogActivity" />
         </activity>
+        firebase
+        <service android:name=".firebase.MeuFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".firebase.MeuFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>

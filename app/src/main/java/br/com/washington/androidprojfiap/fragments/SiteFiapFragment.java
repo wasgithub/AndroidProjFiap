@@ -16,7 +16,7 @@ import br.com.washington.androidprojfiap.fragments.dialog.AboutDialog;
 import livroandroid.lib.fragment.BaseFragment;
 
 public class SiteFiapFragment extends BaseFragment {
-    private static final String URL_SOBRE = "http://www.livroandroid.com.br/sobre.htm";
+    private static final String URL_SOBRE = "http://www.fiap.com.br";
     protected SwipeRefreshLayout swipeLayout;
     private WebView webview;
     private ProgressBar progress;

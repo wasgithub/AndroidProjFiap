@@ -58,11 +58,20 @@ Dev: Washington Alexandre da silva.
 
     <!-- O -->
     <string name="ok">OK</string>
+    <string name="login_user">your user</string>
+    <string name="login_required_user">User required</string>
+    <string name="login_pass">your pass</string>
+    <string name="connect">Connect</string>
+    <string name="login_required_password">Password required</string>
+    <string name="login_invalid_user">Invalid user</string>
+    <string name="login_invalid_password">Invalid password</string>
+    <string name="keep_connected">Keep connected</string>
+    <string name="or">OR</string>
 
     <!-- S -->
     <string name="share">Share</string>
     <string name="sobre">About</string>
-    <string name="site_da_fiap">web site of FIAP</string>
+    <string name="call_fiap">Call FIAP</string>
 
     <!-- V -->
     <string name="vazio" />
@@ -71,6 +80,7 @@ Dev: Washington Alexandre da silva.
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings">settings</string>
+    <string name="exit">Exit</string>
 
 
 </resources>

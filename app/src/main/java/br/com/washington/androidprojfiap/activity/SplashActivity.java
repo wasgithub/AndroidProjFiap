@@ -1,57 +1,56 @@
 package br.com.washington.androidprojfiap.activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
+import android.os.Handler;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import br.com.washington.androidprojfiap.R;
-import br.com.washington.androidprojfiap.utils.PermissionUtils;
-import livroandroid.lib.utils.AlertUtils;
+import br.com.washington.androidprojfiap.api.IRetrofitApi;
+import br.com.washington.androidprojfiap.domain.Login;
 
 public class SplashActivity extends BaseActivity {
 
+    public static final int SPLASH_DISPLAY_LENGTH = 3500;
+    private boolean loadedData = false;
+    private IRetrofitApi retrofitApi;
+    private SharedPreferences preferences = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Lista de permissões necessárias.
-        String permissions[] = new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-        };
 
-        // Valida lista de permissões.
-        boolean ok = PermissionUtils.validate(this, 0, permissions);
+        loadSplashLogo();
 
-        if (ok) {
-            // Tudo OK, pode entrar.
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
     }
+    private void loadSplashLogo() {
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.animacao_splash);
+        animation.reset();
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        for (int result : grantResults) {
-            if (result == PackageManager.PERMISSION_DENIED) {
-                // Negou a permissão. Mostra alerta e fecha.
-                AlertUtils.alert(getContext(), R.string.app_name, R.string.msg_alerta_permissao, R.string.ok, new Runnable() {
-                    @Override
-                    public void run() {
-                        // Negou permissão. Sai do app.
-                        finish();
-                    }
-                });
-                return;
+        ImageView imageView = (ImageView) findViewById(R.id.splash);
+        imageView.clearAnimation();
+        imageView.startAnimation(animation);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Após o tempo definido irá executar a próxima tela
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION); //TODO verify
+                startActivity(intent);
+
+                //Retira a Activity da pilha quando clicar no botao voltar
+                SplashActivity.this.finish();
+
             }
-        }
 
-        // Permissões concedidas, pode entrar.
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+        }, SPLASH_DISPLAY_LENGTH);
+
     }
 }

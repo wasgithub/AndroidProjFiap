@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/login_vertical_margin"
+    android:paddingLeft="@dimen/login_horizontal_margin"
+    android:paddingRight="@dimen/login_horizontal_margin"
+    android:paddingTop="@dimen/login_vertical_margin"
+    android:orientation="vertical"
+    android:background="@color/backlogin">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_pata"
+        android:layout_gravity="center"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_user"
+            android:text="android"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_pass"
+            android:inputType="textPassword"
+            android:text="mobile"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/cbKeepConnected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/login_horizontal_margin"
+        android:paddingBottom="@dimen/login_horizontal_margin"
+        android:text="@string/keep_connected" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="signIn"
+        android:text="@string/connect"
+        android:background="@color/accent"
+        android:textColor="@color/white"/>
+
+
+
+</LinearLayout>

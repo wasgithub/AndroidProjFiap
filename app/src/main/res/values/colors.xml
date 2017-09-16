@@ -4,6 +4,7 @@
     <color name="primary_dark">#4a5c60</color>
     <color name="accent">#0c9abe</color>
     <color name="control_highlight">#B3E5FC</color>
+    <color name="backlogin">#fafbfb</color>
 
     <!-- Outras cores -->
     <color name="transparent">#0000</color>
