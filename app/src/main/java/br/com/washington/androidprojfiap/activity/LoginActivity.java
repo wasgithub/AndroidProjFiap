@@ -6,8 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import br.com.washington.androidprojfiap.R;
 
@@ -15,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etLogin;
     private EditText etSenha;
+
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +35,39 @@ public class LoginActivity extends AppCompatActivity {
         etLogin=(EditText)findViewById(R.id.etUser);
         etSenha=(EditText)findViewById(R.id.etPass);
 
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.loginFacebook);
+
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Intent intent = new Intent(LoginActivity.this,
+                                MainActivity.class);
+
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
+
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
     //clique no botao
     public void signIn(View view){
         //recuperar os valores logados
