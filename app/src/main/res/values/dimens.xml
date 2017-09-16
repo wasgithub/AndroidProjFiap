@@ -21,9 +21,12 @@
     <dimen name="popup_width">300dp</dimen>
     <dimen name="popup_height">300dp</dimen>
 
-    <dimen name="login_vertical_margin">90dp</dimen>
-    <dimen name="login_horizontal_margin">30dp</dimen>
+    <dimen name="login_vertical_margin">50dp</dimen>
+    <dimen name="login_horizontal_margin">15dp</dimen>
     <dimen name="dog_marg">20sp</dimen>
+
+    <dimen name="button_layout_width">250dp</dimen>
+    <dimen name="button_layout_height">40dp</dimen>
 
 
 </resources>
