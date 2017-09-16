@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/dialog_linear">
 
     <TextView
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:id="@+id/tNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp" />
+        android:layout_margin="@dimen/dialog_editt" />
 
     <Button
         android:id="@+id/btAtualizar"

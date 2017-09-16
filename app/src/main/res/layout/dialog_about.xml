@@ -2,7 +2,7 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:padding="@dimen/about_text"
     android:text="@string/about_dialog_text"
     android:background="@drawable/ic_pata"/>
 

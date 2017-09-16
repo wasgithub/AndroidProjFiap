@@ -22,8 +22,8 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="@dimen/textmarginadap"
+            android:layout_marginTop="@dimen/textmarginadap"
             android:textSize="@dimen/dog_marg" />
 
         <FrameLayout
@@ -35,7 +35,7 @@
                 android:layout_width="@dimen/img_dog_adapter_width"
                 android:layout_height="@dimen/img_dog_adapter_height"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="6dp" />
+                android:layout_marginTop="@dimen/adp_margin" />
             <!-- Barra de progresso enquanto carrega a foto -->
             <ProgressBar
                 android:id="@+id/progressImg"
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_vertical"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="@dimen/adp_margin"
                 android:gravity="center|center_vertical"
                 android:visibility="invisible" />
         </FrameLayout>

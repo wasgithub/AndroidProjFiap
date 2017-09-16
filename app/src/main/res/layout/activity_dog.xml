@@ -19,7 +19,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="@dimen/dogbar"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -55,7 +55,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:src="@drawable/ic_favorite"
-        android:tint="@color/gray"
+        android:tint="@color/white"
         app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        android:background="@color/red"/>
 </android.support.design.widget.CoordinatorLayout>

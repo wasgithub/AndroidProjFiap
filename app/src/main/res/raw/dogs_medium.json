@@ -2,28 +2,28 @@
   "dogs": {
     "dog": [
       {
-        "nome": "Boxer",
-        "desc": "O Boxer é brincalhão e ótimo para crianças. Ele precisa de um quintal e bastante espaço para correr e se exercitar.",
+        "nome": "Bull Terrier",
+        "desc": "O Bull Terrier é forte, teimoso e muito fofo. Muitos acham que ele é o famoso Pit Bull, mas ele é bem diferente, tanto física quanto psicologicamente.",
         "url_info": "http://tudosobrecachorros.com.br/boxer/",
-        "url_foto": "http://3.bp.blogspot.com/-iIMa_5LMxP0/VhCurZRvaQI/AAAAAAAAMRc/O5dCX-72n0U/s1600/Boxer.jpg",
+        "url_foto": "http://image.cachorrogato.com.br/imagens/topos/topo_37_1374221177.png",
         "url_video": "",
         "latitude": "-23.564224",
         "longitude": "-46.653156"
       },
       {
-        "nome": "Cane Corso",
-        "desc": "O Cane Corso é um cachorro grande, forte e muito imponente. Conheça tudo sobre essa raça.",
+        "nome": "Cocker Spaniel",
+        "desc": "O Cocker Spaniel é super popular no Brasil e está presente em diversos lares do país. Infelizmente devido à sua popularização, hoje encontramos muitos Cockers com desvio de comportamento, agressivos e nervosos. Mas o normal dessa raça é longe disso.",
         "url_info": "http://tudosobrecachorros.com.br/cane-corso/",
-        "url_foto": "http://image.cachorrogato.com.br/imagens/topos/topo_41_1374221624.png",
+        "url_foto": "http://image.cachorrogato.com.br/imagens/topos/topo_118_1375212012.png",
         "url_video": "",
         "latitude": "-23.564224",
         "longitude": "-46.653156"
       },
       {
-        "nome": "Dogo Argentino",
-        "desc": "cão de caça e briga.",
+        "nome": "Shar Pei ",
+        "desc": "O Shar Pei não é um dos cães mais fáceis de lidar e não é recomendado para donos inexperientes. Muitos se apaixonam por aquele filhotinho enrugado e acaba tendo problemas com seu temperamento/comportamento no futuro. Por isso é tão importante pesquisar muito sobre a raça antes de adquirir um cão.",
         "url_info": "http://tudosobrecachorros.com.br/dogo-argentino/",
-        "url_foto": "https://static.wixstatic.com/media/d9ca3b_6bb3d67b9e5c4bbebb82bc2024a3e9f8.png/v1/fill/w_237,h_200,al_c,usm_0.66_1.00_0.01/d9ca3b_6bb3d67b9e5c4bbebb82bc2024a3e9f8.png",
+        "url_foto": "https://d2hnq3n4y7y0gz.cloudfront.net/imagens/s280x280_shar-pei.png",
         "url_video": "",
         "latitude": "-23.564224",
         "longitude": "-46.653156"
